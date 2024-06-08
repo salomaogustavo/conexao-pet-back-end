@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { AnimalService } from './animal.service';
-import { AnimalCreateDTO } from './dto/createAnimalDTO.dto';
-import { AnimalUpdateDTO } from './dto/updateAnimalDTO.dto';
+import { AnimalDTO } from './animal.dto';
 
 @Controller('animal')
 export class AnimalController {
@@ -11,22 +10,22 @@ export class AnimalController {
   ) {}
 
   @Post()
-  async create(@Body() animal: AnimalCreateDTO) {
+  async create(@Body() animal: AnimalDTO) {
     return await this.animalService.create(animal);
   }
 
   @Get(':id')
-  async findById(@Param('id') id: string): Promise<AnimalCreateDTO> {
+  async findById(@Param('id') id: string): Promise<AnimalDTO> {
     return await this.animalService.findById(id);
   }
 
   @Get()
-  async findAll(): Promise<AnimalCreateDTO[]> {
+  async findAll(): Promise<AnimalDTO[]> {
     return await this.animalService.findAll();
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() animal: AnimalUpdateDTO) {
+  async update(@Param('id') id: string, @Body() animal: AnimalDTO) {
     return await this.animalService.update(id, animal);
   }
 

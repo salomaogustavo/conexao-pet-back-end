@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { DoacaoService } from './doacao.service';
-import { DoacaoCreateDTO } from './dto/createDoacaoDTO.dto';
-import { DoacaoUpdateDTO } from './dto/updateDoacaoDTO.dto';
+import { DoacaoDTO } from './doacao.dto';
 
 @Controller('doacao')
 export class DoacaoController {
@@ -11,22 +10,22 @@ export class DoacaoController {
   ) {}
 
   @Post()
-  async create(@Body() doacao: DoacaoCreateDTO) {
+  async create(@Body() doacao: DoacaoDTO) {
     return await this.doacaoService.create(doacao);
   }
 
   @Get(':id')
-  async findById(@Param('id') id: string): Promise<DoacaoCreateDTO> {
+  async findById(@Param('id') id: string): Promise<DoacaoDTO> {
     return await this.doacaoService.findById(id);
   }
 
   @Get()
-  async findAll(): Promise<DoacaoCreateDTO[]> {
+  async findAll(): Promise<DoacaoDTO[]> {
     return await this.doacaoService.findAll();
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() doacao: DoacaoUpdateDTO) {
+  async update(@Param('id') id: string, @Body() doacao: DoacaoDTO) {
     return await this.doacaoService.update(id, doacao);
   }
 

@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { PessoaService } from './pessoa.service';
-import { PessoaCreateDTO } from './dto/createPessoaDTO.dto';
-import { PessoaUpdateDTO } from './dto/updatePessoaDTO.dto';
+import { PessoaDTO } from './pessoa.dto';
 
 @Controller('pessoa')
 export class PessoaController {
@@ -11,22 +10,22 @@ export class PessoaController {
   ) {}
 
   @Post()
-  async create(@Body() pessoa: PessoaCreateDTO) {
+  async create(@Body() pessoa: PessoaDTO) {
     return await this.pessoaService.create(pessoa);
   }
 
   @Get(':id')
-  async findById(@Param('id') id: string): Promise<PessoaCreateDTO> {
+  async findById(@Param('id') id: string): Promise<PessoaDTO> {
     return await this.pessoaService.findById(id);
   }
 
   @Get()
-  async findAll(): Promise<PessoaCreateDTO[]> {
+  async findAll(): Promise<PessoaDTO[]> {
     return await this.pessoaService.findAll();
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() pessoa: PessoaUpdateDTO) {
+  async update(@Param('id') id: string, @Body() pessoa: PessoaDTO) {
     return await this.pessoaService.update(id, pessoa);
   }
 
