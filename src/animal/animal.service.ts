@@ -1,9 +1,8 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
-import { AnimalCreateDTO } from './dto/createAnimalDTO.dto';
-import { AnimalUpdateDTO } from './dto/updateAnimalDTO.dto';
+import { AnimalDTO } from './animal.dto';
+import { AnimalEntity } from './animal.entity';
 import { FindOptionsWhere, ILike, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AnimalEntity } from './entities/animal.entity';
 
 @Injectable()
 export class AnimalService {
@@ -13,7 +12,7 @@ export class AnimalService {
     private animalRepository: Repository<AnimalEntity>
   ) {}
 
-  async create(animal: AnimalCreateDTO): Promise<string | Error> {
+  async create(animal: AnimalDTO): Promise<string | Error> {
     try {
       let newAnimal = this.animalRepository.create(animal);
 
@@ -25,13 +24,16 @@ export class AnimalService {
 
       return `Animal "${newAnimal.id}" criado com sucesso.`;
     } catch (error) {
-      throw new NotFoundException(`Erro ao criar Animal: ${error.message}.`);
+      throw new NotFoundException(`Erro ao criar Animal.`);
     }
   }
 
   async findById(id: string): Promise<AnimalEntity> {
     try {
-      return await this.animalRepository.findOne({ where: { id } });
+      return await this.animalRepository.findOne({
+        where: { id },
+        relations: ['doacao']
+      });
     } catch (error) {
       throw new NotFoundException(`Animal com id "${id}" não foi encontrado.`);
     }
@@ -39,25 +41,38 @@ export class AnimalService {
 
   async findAll(): Promise<AnimalEntity[]> {
     try {
-      return await this.animalRepository.find();
+      return await this.animalRepository.find({
+        relations: ['doacao']
+      });
     } catch (error) {
-      throw new HttpException(`Erro ao buscar Animais.`, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        `Erro ao buscar Animais.`,
+        HttpStatus.BAD_REQUEST
+      );
     }
   }
 
-  async update(id: string, animal: AnimalUpdateDTO): Promise<string | Error> {
+  async update(id: string, animal: AnimalDTO): Promise<string | Error> {
     try {
-      const found = await this.animalRepository.findOne({ where: { id } });
+      let found = await this.animalRepository.findOne({
+        where: { id }
+      });
 
       if ( !found ) {
-        throw new HttpException(`Animal não foi encontrado.`, HttpStatus.BAD_REQUEST);
+        throw new HttpException(
+          `Animal com id: ${id} não foi encontrado.`,
+          HttpStatus.BAD_REQUEST
+        );
       }
 
       await this.animalRepository.update(id, animal);
 
       return `Animal atualizado com sucesso.`;
     } catch (error) {
-      throw new HttpException(`Erro ao atualizar Animal.`, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        `Animal com id: ${id} não foi encontrado.`,
+        HttpStatus.BAD_REQUEST
+      );
     }
   }
 
@@ -67,7 +82,10 @@ export class AnimalService {
   
       return 'Animal excluido com sucesso.';
     } catch (error) {
-      throw new HttpException(`Animal não encontrado.`, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        `Erro ao excluir Animal.`,
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
     }
   }
 }
