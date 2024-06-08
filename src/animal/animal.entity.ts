@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToOne } from "typeorm";
-import { AnimalGeneroEnum } from '../../enums/animal_genero.enum';
-import { TipoEnum } from '../../enums/tipo.enum';
-import { DoacaoEntity } from '../../doacao/entities/doacao.entity';
+import { AnimalGeneroEnum } from '../enums/animal_genero.enum';
+import { TipoEnum } from '../enums/tipo.enum';
+import { DoacaoEntity } from '../doacao/doacao.entity';
 
 @Entity({ name: 'animal' })
 export class AnimalEntity {

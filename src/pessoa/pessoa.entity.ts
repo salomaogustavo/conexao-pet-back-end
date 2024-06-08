@@ -1,6 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne } from "typeorm";
-import { PessoaGeneroEnum } from '../../enums/pessoa_genero.enum';
-import { DoacaoEntity } from '../../doacao/entities/doacao.entity';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { PessoaGeneroEnum } from '../enums/pessoa_genero.enum';
+import { DoacaoEntity } from '../doacao/doacao.entity';
 
 @Entity({ name: 'pessoa' })
 export class PessoaEntity {
@@ -22,6 +22,9 @@ export class PessoaEntity {
   @Column()
   telefone: string;
 
-  @OneToOne(() => DoacaoEntity, (doacao) => doacao.pessoa)
-  doacao: DoacaoEntity;
+  @Column()
+  foto: string;
+  
+  @OneToMany(() => DoacaoEntity, (doacao) => doacao.pessoa)
+  doacoes: DoacaoEntity[];
 }

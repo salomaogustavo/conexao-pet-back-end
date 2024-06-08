@@ -1,6 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
-import { AnimalEntity } from '../../animal/entities/animal.entity';
-import { PessoaEntity } from '../../pessoa/entities/pessoa.entity';
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, ManyToOne, JoinColumn } from "typeorm";
+import { AnimalEntity } from '../animal/animal.entity';
+import { PessoaEntity } from '../pessoa/pessoa.entity';
 
 @Entity({ name: 'doacao' })
 export class DoacaoEntity {
@@ -10,7 +10,7 @@ export class DoacaoEntity {
   @Column()
   descricao: string;
 
-  @OneToOne(() => PessoaEntity, (pessoa) => pessoa.doacao)
+  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.doacoes)
   @JoinColumn({ name: 'pessoa_id' })
   pessoa: PessoaEntity;
   
