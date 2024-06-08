@@ -19,9 +19,11 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node ./node_modules/typeorm/cli",
-    "database:create": "npm run typeorm -- migration:create ./src/database/database_migrations/%npm_config_name%",
-    "database:migrate": "npm run typeorm migration:run -- -d ./src/database/connection.ts",
-    "database:rollback": "npm run typeorm migration:revert -- -d ./src/database/connection.ts"
+    "database:create": "npm run typeorm -- migration:create ./src/database/data-source/%npm_config_name%",
+    "database:run": "npm run typeorm migration:run -- -d ./src/database/data-source.ts",
+    "database:rollback": "npm run typeorm migration:revert -- -d ./src/database/data-source-seed.ts",
+    "database-seed:run": "npm run typeorm migration:run -- -d ./src/database/data-source-seed.ts",
+    "database-seed:rollback": "npm run typeorm migration:revert -- -d ./src/database/data-source-seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
