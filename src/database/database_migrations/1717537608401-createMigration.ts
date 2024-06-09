@@ -12,7 +12,7 @@ export class CreateMigration1717537608401 implements MigrationInterface {
         "id" uuid DEFAULT gen_random_uuid() PRIMARY KEY,
         "nome" varchar(255) NOT NULL,
         "cpf" varchar(11) NOT NULL,
-        "telefone" varchar(14) NOT NULL,
+        "telefone" varchar(16) NOT NULL,
         "data_nascimento" date,
         "foto" text,
         "genero" "public"."pessoa_genero_enum" DEFAULT 'I'
@@ -23,6 +23,7 @@ export class CreateMigration1717537608401 implements MigrationInterface {
         "nome" varchar(255) NOT NULL,
         "raca" varchar(255) NOT NULL,
         "adotado" boolean DEFAULT false,
+        "data_nascimento" date,
         "foto" text NOT NULL,
         "genero" "public"."animal_genero_enum" DEFAULT 'M',
         "tipo" "public"."animal_tipo_enum" DEFAULT 'C'
