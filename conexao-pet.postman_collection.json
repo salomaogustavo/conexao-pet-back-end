@@ -1,0 +1,372 @@
+{
+	"info": {
+		"_postman_id": "59919630-5a56-41bc-88e6-c4be7eaae415",
+		"name": "Conexão Pet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35320319"
+	},
+	"item": [
+		{
+			"name": "pessoa",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pessoa",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pessoa/3b6253c0-af44-4769-a0ea-2da3280d5136",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pessoa",
+								"3b6253c0-af44-4769-a0ea-2da3280d5136"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\": \"M. Da Silva\",\n\t\"dataNascimento\": \"1985-05-15\",\n\t\"genero\": \"F\",\n\t\"cpf\": \"669.809.680-68\",\n\t\"telefone\": \"(48) 9 1234-5678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/pessoa",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\": \"João Silva\",\n\t\"dataNascimento\": \"1985-05-15\",\n\t\"genero\": \"M\",\n\t\"cpf\": \"128.749.649-05\",\n\t\"telefone\": \"(48) 9 9999-9999\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/pessoa/3b6253c0-af44-4769-a0ea-2da3280d5136",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pessoa",
+								"3b6253c0-af44-4769-a0ea-2da3280d5136"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pessoa/3b6253c0-af44-4769-a0ea-2da3280d5136",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pessoa",
+								"3b6253c0-af44-4769-a0ea-2da3280d5136"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "animal",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/animal",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"animal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/animal/c40c0380-d277-4e8d-ba44-09708a016486",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"animal",
+								"c40c0380-d277-4e8d-ba44-09708a016486"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\": \"Rex\",\n\t\"raca\": \"Labrador\",\n\t\"dataNascimento\": \"2020-01-01\",\n\t\"tipo\": \"C\",\n\t\"genero\": \"M\",\n\t\"adotado\": false,\n\t\"foto\": \"https://upload.wikimedia.org/wikipedia/commons/4/4a/Black_Labrador_Retriever_portrait.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/animal",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"animal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"nome\": \"Teddy\",\n\t\"raca\": \"Vira-Lata\",\n\t\"dataNascimento\": null,\n\t\"tipo\": \"C\",\n\t\"genero\": \"M\",\n\t\"adotado\": true,\n\t\"foto\": \"https://www.adoropets.com.br/wp-content/uploads/2019/12/vira-lata-cabeca-1200x800.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/animal/c40c0380-d277-4e8d-ba44-09708a016486",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"animal",
+								"c40c0380-d277-4e8d-ba44-09708a016486"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/animal/c40c0380-d277-4e8d-ba44-09708a016486",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"animal",
+								"c40c0380-d277-4e8d-ba44-09708a016486"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "doação",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/doacao",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"doacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/doacao/9fbdfa5a-1a02-428a-b58a-983c0974a5a0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"doacao",
+								"9fbdfa5a-1a02-428a-b58a-983c0974a5a0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"descricao\": \"Tcahu Lana!!1\",\n\t\"pessoaId\": \"3b6253c0-af44-4769-a0ea-2da3280d5136\",\n\t\"animalId\": \"7c6866ac-f9d5-4298-bf3d-e03e8cf2e262\",\n\t\"rua\": \"Rua A.\",\n\t\"bairro\": \"Bairro B.\",\n\t\"cidade\": \"Cidade C.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/doacao",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"doacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"descricao\": \"Tchau Teddy ;u;\",\n\t\"pessoaId\": \"3b6253c0-af44-4769-a0ea-2da3280d5136\",\n\t\"animalId\": \"c40c0380-d277-4e8d-ba44-09708a016486\",\n\t\"rua\": \"Rua A.\",\n\t\"bairro\": \"Bairro B.\",\n\t\"cidade\": \"Cidade C.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/doacao/9fbdfa5a-1a02-428a-b58a-983c0974a5a0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"doacao",
+								"9fbdfa5a-1a02-428a-b58a-983c0974a5a0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/doacao/9fbdfa5a-1a02-428a-b58a-983c0974a5a0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"doacao",
+								"9fbdfa5a-1a02-428a-b58a-983c0974a5a0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
