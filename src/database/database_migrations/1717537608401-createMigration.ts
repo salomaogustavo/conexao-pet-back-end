@@ -11,7 +11,7 @@ export class CreateMigration1717537608401 implements MigrationInterface {
       CREATE TABLE "pessoa"(
         "id" uuid DEFAULT gen_random_uuid() PRIMARY KEY,
         "nome" varchar(255) NOT NULL,
-        "cpf" varchar(11) NOT NULL,
+        "cpf" varchar(15) NOT NULL,
         "telefone" varchar(16) NOT NULL,
         "data_nascimento" date,
         "foto" text,
