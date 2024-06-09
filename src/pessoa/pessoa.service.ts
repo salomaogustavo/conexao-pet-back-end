@@ -4,7 +4,7 @@ import { PessoaEntity } from './pessoa.entity';
 import { PessoaGeneroEnum } from '../enums/pessoa_genero.enum';
 import { FindOptionsWhere, ILike, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { isValid } from '../functions/validar_cpf.function';
+import { isValid, format } from '../functions/validar_cpf.function';
 
 @Injectable()
 export class PessoaService {
@@ -15,7 +15,18 @@ export class PessoaService {
   ) {}
 
   private applyMaskToPhoneNumber(telefone: string): string {
-    return telefone.toString().replace(/(\d{2})(\d{1})(\d{4})(\d{4})/, "($1) $2 $3-$4");
+    if ( !telefone.match(/\(\d{2}\) \d{1} \d{4}-\d{4}/) ) {
+      if ( /^\d{11}$/.test(telefone) ) {
+        return telefone.replace(/(\d{2})(\d{1})(\d{4})(\d{4})/, "($1) $2 $3-$4");
+      }
+
+      throw new HttpException(
+        'Número de telefone inválido.',
+        HttpStatus.BAD_REQUEST
+      );
+    }
+
+    return telefone;
   }
 
   async create(pessoa: PessoaDTO): Promise<string | Error> {
@@ -24,6 +35,7 @@ export class PessoaService {
         throw new NotFoundException(`CPF inválido.`);
       }
 
+      pessoa.cpf = format(pessoa.cpf);
       pessoa.telefone = this.applyMaskToPhoneNumber(pessoa.telefone);
 
       let newPessoa = this.pessoaRepository.create(pessoa);
@@ -78,6 +90,7 @@ export class PessoaService {
 
       await this.findById(id);
 
+      pessoa.cpf = format(pessoa.cpf);
       pessoa.telefone = this.applyMaskToPhoneNumber(pessoa.telefone);
 
       await this.pessoaRepository.update(id, pessoa);

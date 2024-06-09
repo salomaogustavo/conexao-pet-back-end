@@ -111,7 +111,8 @@ export class DoacaoService {
   async update(id: string, doacao: DoacaoDTO): Promise<string | Error> {
     try {
       let found = await this.doacaoRepository.findOne({
-        where: { id }
+        where: { id },
+        relations: ['pessoa', 'animal']
       });
 
       if ( !found ) {
@@ -121,8 +122,12 @@ export class DoacaoService {
         );
       }
 
-      if (found.pessoa.id !== doacao.pessoaId) {
-        let pessoa = await this.animalService.findById(doacao.pessoaId);
+      const keys = Object.keys(doacao);
+      const filteredKeys = keys.filter(key => key!== 'pessoaId' && key!== 'animalId');
+      const updateData = Object.fromEntries(filteredKeys.map(key => [key, doacao[key]]));
+
+      if ( found.pessoa.id !== doacao.pessoaId ) {
+        let pessoa = await this.pessoaService.findById(doacao.pessoaId);
 
         if ( !pessoa ) {
           throw new HttpException(
@@ -132,8 +137,15 @@ export class DoacaoService {
         }
       }
 
-      if (found.animal.id !== doacao.animalId) {
+      if ( found.animal.id !== doacao.animalId ) {
         let animal = await this.animalService.findById(doacao.animalId);
+
+        if ( !animal ) {
+          throw new HttpException(
+            `Animal com id: "${doacao.animalId}" não foi encontrado.`,
+            HttpStatus.BAD_REQUEST
+          );
+        }
 
         if ( animal.adotado ) {
           throw new HttpException(
@@ -143,7 +155,7 @@ export class DoacaoService {
         }
       }
 
-      await this.doacaoRepository.update(id, doacao);
+      await this.doacaoRepository.update(id, updateData);
 
       return `Doação atualizada com sucesso.`;
     } catch (error) {
@@ -156,6 +168,19 @@ export class DoacaoService {
 
   async remove(id: string): Promise<string | Error> {
     try {
+      let doacao = await this.doacaoRepository.findOne({
+        where: { id },
+        relations: ['animal']
+      });
+
+      if ( !doacao ) {
+        throw new NotFoundException(`Doação com id "${id}" não foi encontrada.`);
+      }
+
+      if ( doacao.animal ) {
+        await this.animalService.update(doacao.animal.id, {...doacao.animal, adotado: false });
+      }
+
       await this.doacaoRepository.delete(id);
   
       return 'Doação excluida com sucesso.';
