@@ -1,6 +1,6 @@
 import { IsString, IsDateString, IsUUID, IsNotEmpty, IsOptional } from 'class-validator';
 
-export class DoacaoDTO {
+export class AdocaoDTO {
   @IsUUID()
   @IsOptional()
   id: string;

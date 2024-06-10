@@ -2,19 +2,19 @@ import { Column, Entity, PrimaryGeneratedColumn, OneToOne, ManyToOne, JoinColumn
 import { AnimalEntity } from '../animal/animal.entity';
 import { PessoaEntity } from '../pessoa/pessoa.entity';
 
-@Entity({ name: 'doacao' })
-export class DoacaoEntity {
+@Entity({ name: 'adocao' })
+export class AdocaoEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
   descricao: string;
 
-  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.doacoes)
+  @ManyToOne(() => PessoaEntity, (pessoa) => pessoa.adocoes)
   @JoinColumn({ name: 'pessoa_id' })
   pessoa: PessoaEntity;
   
-  @OneToOne(() => AnimalEntity, (animal) => animal.doacao)
+  @OneToOne(() => AnimalEntity, (animal) => animal.adocao)
   @JoinColumn({ name: 'animal_id' })
   animal: AnimalEntity;
   

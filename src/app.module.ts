@@ -4,14 +4,14 @@ import { AppService } from './app.service';
 import { dataSourceOptions } from './database/data-source';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnimalModule } from './animal/animal.module';
-import { DoacaoModule } from './doacao/doacao.module';
+import { AdocaoModule } from './adocao/adocao.module';
 import { PessoaModule } from './pessoa/pessoa.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
     AnimalModule,
-    DoacaoModule,
+    AdocaoModule,
     PessoaModule,
   ],
   controllers: [AppController],

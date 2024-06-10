@@ -1,7 +1,7 @@
 import { IsString, IsDateString, IsUUID, IsOptional, IsNotEmpty, IsEnum, Matches, IsArray, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { PessoaGeneroEnum } from '../enums/pessoa_genero.enum';
-import { DoacaoEntity } from '../doacao/doacao.entity';
+import { AdocaoEntity } from '../adocao/adocao.entity';
 
 export class PessoaDTO {
   @IsUUID()
@@ -38,7 +38,7 @@ export class PessoaDTO {
 
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => DoacaoEntity)
-  doacoes: DoacaoEntity[];
+  @Type(() => AdocaoEntity)
+  adocoes: AdocaoEntity[];
 }
 

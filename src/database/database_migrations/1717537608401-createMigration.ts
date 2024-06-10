@@ -29,7 +29,7 @@ export class CreateMigration1717537608401 implements MigrationInterface {
         "tipo" "public"."animal_tipo_enum" DEFAULT 'C'
       );
 
-      CREATE TABLE "doacao"(
+      CREATE TABLE "adocao"(
         "id" uuid DEFAULT gen_random_uuid() PRIMARY KEY,
         "descricao" text,
         "pessoa_id" uuid NOT NULL,
@@ -47,7 +47,7 @@ export class CreateMigration1717537608401 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-      DROP TABLE "doacao";
+      DROP TABLE "adocao";
       DROP TABLE "animal";
       DROP TABLE "pessoa";
       DROP TYPE "public"."animal_tipo_enum";

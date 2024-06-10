@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { PessoaGeneroEnum } from '../enums/pessoa_genero.enum';
-import { DoacaoEntity } from '../doacao/doacao.entity';
+import { AdocaoEntity } from '../adocao/adocao.entity';
 
 @Entity({ name: 'pessoa' })
 export class PessoaEntity {
@@ -25,6 +25,6 @@ export class PessoaEntity {
   @Column()
   foto: string;
   
-  @OneToMany(() => DoacaoEntity, (doacao) => doacao.pessoa)
-  doacoes: DoacaoEntity[];
+  @OneToMany(() => AdocaoEntity, (adocao) => adocao.pessoa)
+  adocoes: AdocaoEntity[];
 }

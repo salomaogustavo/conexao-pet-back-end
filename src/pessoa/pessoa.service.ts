@@ -59,7 +59,7 @@ export class PessoaService {
     try {
       return await this.pessoaRepository.findOne({
         where: { id },
-        relations: ['doacoes']
+        relations: ['adocoes']
       });
     } catch (error) {
       throw new HttpException(
@@ -72,7 +72,7 @@ export class PessoaService {
   async findAll(): Promise<PessoaDTO[]> {
     try {
       return await this.pessoaRepository.find({
-        relations: ['doacoes']
+        relations: ['adocoes']
       });
     } catch (error) {
       throw new HttpException(

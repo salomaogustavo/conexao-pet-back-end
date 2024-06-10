@@ -32,7 +32,7 @@ export class AnimalService {
     try {
       return await this.animalRepository.findOne({
         where: { id },
-        relations: ['doacao']
+        relations: ['adocao']
       });
     } catch (error) {
       throw new NotFoundException(`Animal com id "${id}" não foi encontrado.`);
@@ -42,7 +42,7 @@ export class AnimalService {
   async findAll(): Promise<AnimalEntity[]> {
     try {
       return await this.animalRepository.find({
-        relations: ['doacao']
+        relations: ['adocao']
       });
     } catch (error) {
       throw new HttpException(
