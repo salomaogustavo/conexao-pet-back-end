@@ -11,7 +11,9 @@ export class AdocaoController {
 
   @Post()
   async create(@Body() adocao: AdocaoDTO) {
-    return await this.adocaoService.create(adocao);
+    let response = await this.adocaoService.create(adocao);
+
+    return { message: response };
   }
 
   @Get(':id')
@@ -26,12 +28,16 @@ export class AdocaoController {
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() adocao: AdocaoDTO) {
-    return await this.adocaoService.update(id, adocao);
+    let response = await this.adocaoService.update(id, adocao);
+
+    return { message: response };
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return await this.adocaoService.remove(id);
+    let response = await this.adocaoService.remove(id);
+
+    return { message: response };
   }
 }
 

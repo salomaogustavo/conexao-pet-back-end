@@ -11,7 +11,9 @@ export class AnimalController {
 
   @Post()
   async create(@Body() animal: AnimalDTO) {
-    return await this.animalService.create(animal);
+    let response = await this.animalService.create(animal);
+
+    return { message: response };
   }
 
   @Get(':id')
@@ -26,12 +28,16 @@ export class AnimalController {
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() animal: AnimalDTO) {
-    return await this.animalService.update(id, animal);
+    let response = await this.animalService.update(id, animal);
+
+    return { message: response };
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return await this.animalService.remove(id);
+    let response = await this.animalService.remove(id);
+
+    return { message: response };
   }
 }
 

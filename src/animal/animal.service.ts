@@ -24,7 +24,7 @@ export class AnimalService {
 
       return `Animal "${newAnimal.id}" criado com sucesso.`;
     } catch (error) {
-      throw new NotFoundException(`Erro ao criar Animal.`);
+      throw new NotFoundException(`Erro ao criar Animal: ${error.message}`);
     }
   }
 

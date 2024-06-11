@@ -11,7 +11,9 @@ export class PessoaController {
 
   @Post()
   async create(@Body() pessoa: PessoaDTO) {
-    return await this.pessoaService.create(pessoa);
+    let response = await this.pessoaService.create(pessoa);
+
+    return { message: response };
   }
 
   @Get(':id')
@@ -26,12 +28,16 @@ export class PessoaController {
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() pessoa: PessoaDTO) {
-    return await this.pessoaService.update(id, pessoa);
+    let response = await this.pessoaService.update(id, pessoa);
+
+    return { message: response };
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return await this.pessoaService.remove(id);
+    let response = await this.pessoaService.remove(id);
+
+    return { message: response };
   }
 }
 
